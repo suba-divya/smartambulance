@@ -1,0 +1,131 @@
+<html>
+<body>
+<style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+table {
+    border-spacing: 5px;
+}
+
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+  // Initialize Firebase
+  
+  var config = {
+    apiKey: "AIzaSyDg5YUqbA8d83NhGC_QzZhG6cJfbM4bcmw",
+    authDomain: "ambulanceservices-1574f.firebaseapp.com",
+    databaseURL: "https://ambulanceservices-1574f.firebaseio.com",
+    projectId: "ambulanceservices-1574f",
+    storageBucket: "ambulanceservices-1574f.appspot.com",
+    messagingSenderId: "957351692513"
+  };
+  firebase.initializeApp(config);
+</script>
+<table style="width:100%" id="ex-table">
+  <tr id="tr">
+    <th>gender</th>
+    <th>able to communicate</th> 
+    <th>patient consicious</th>
+    <th>patient bleeding</th>
+    <th>vitals normal?</th>
+    <th>name</th>
+    <th>phone no</th>
+ </table> 
+
+<script>
+
+var userDataRef = firebase.database().ref("questions").orderByKey();
+userDataRef.once("value").then(function(snapshot) {
+snapshot.forEach(function(childSnapshot) {
+  var key = childSnapshot.key;
+  var childData = childSnapshot.val();              
+
+  var a1 = childSnapshot.val().answer1;
+  var a2 = childSnapshot.val().answer2;
+  var a3 = childSnapshot.val().answer3;
+
+var a4 = childSnapshot.val().answer4;
+
+var a5 = childSnapshot.val().answer5;
+var a6 = childSnapshot.val().answer6;
+var a7 = childSnapshot.val().answer7;
+
+
+
+  $("#gender").append(a1);
+  $("#communicate").append(a2);
+
+  });
+});
+
+
+
+
+
+/*var database = firebase.database().ref().child('questions');
+database.once('value', function(snapshot){
+    if(snapshot.exists()){
+        var content = '';
+
+        snapshot.forEach(function(data)
+        {
+            var gender = data.val().answer1;
+            var communicate= data.val().answer2;
+            var consicious= data.val().answer3;
+            var bleeding= data.val().answer4;
+            var normal= data.val().answer5;
+            var name= data.val().answer6;
+            var phno= data.val().answer7;
+
+            /*content += '<tr>';
+            content += '<td>' + gender+ '</td>'; //column1
+            content += '<td>' + communicate+ '</td>';//column2
+            content += '<td>' +consicious + '</td>';
+            content += '<td>' +bleeding + '</td>';
+            content += '<td>' +normal + '</td>';
+            content += '<td>' +name + '</td>';
+            content += '<td>' +phno + '</td>';
+            content += '</tr>';
+        });*/
+
+       
+
+
+
+
+   /* var database = firebase.database();
+    database.ref().on('value', function(snapshot){
+        if(snapshot.exists()){
+            var content = '';
+            snapshot.forEach(function(data){
+                var val = data.val();
+                content +='<tr>';
+                content += '<td>' + val.answer1 + '</td>';
+                content += '<td>' + val.answer2 + '</td>';
+                content += '<td>' + val.answer3+ '</td>';
+                content += '<td>' + val.answer4+ '</td>';
+                content += '<td>' + val.answer5 + '</td>';
+                content += '<td>' + val.answer6 + '</td>';
+                content += '<td>' + val.answer7+ '</td>';
+                content += '</tr>';
+            });
+            $('#ex-table').append(content);
+        }
+    }); */
+</script>
+var answer1= snap.child("answer1").val();
+    var answer2= snap.child("answer2").val();
+
+    $("#table_body").append("<tr><td>"+ answer1 +"</td><td>"+ answer2 +"</td></tr>");
